@@ -101,37 +101,62 @@ if ($loottable_id > 0) {
                     </td>
                   </tr>
                 </table>
-                <div style="padding: 10px; border: 1px solid grey; margin-right: 10px;">
-                  <b>NPC Faction ID</b>: <?=$npc_faction_id?> [<a href="index.php?editor=npc&z=<?=$currzone?>&zoneid=<?=$currzoneid?>&npcid=<?=$npcid?>&action=3">edit</a>]
-                  [<a href="index.php?editor=npc&z=<?=$currzone?>&zoneid=<?=$currzoneid?>&npcid=<?=$npcid?>&npcfid=<?=$npc_faction_id?>&action=47">update</a>]<br><br>
-<?if ($npc_faction_id > 0) {?>
-                  "<a href="index.php?editor=npc&z=<?=$currzone?>&zoneid=<?=$currzoneid?>&npcid=<?=$npcid?>&action=10"><?=$factionname?></a>"<br><br>
-<?}?>
-                  <b>Primary Faction</b>: [<a href="index.php?editor=npc&z=<?=$currzone?>&zoneid=<?=$currzoneid?>&npcid=<?=$npcid?>&action=12">edit</a>]<br>
-                  <?echo ($primaryfactionname != '') ? "<a title='Faction: " . $primaryfaction . "'>" . $primaryfactionname . "</a>" : "None";?><br><br>
-                  <b>Faction Hits:</b> <a href="index.php?editor=npc&z=<?=$currzone?>&zoneid=<?=$currzoneid?>&npcid=<?=$npcid?>&action=15"><img src="images/add.gif" style="border: 0;" title="Add Faction Hit" alt="Add Faction Hit"></a><br>
-<?if ($faction_hits != '') {?>
-                  <table width="100%">
-<?foreach($faction_hits as $hit): extract($hit);?>
-                    <tr>
-                      <td><?echo "<a title='Faction ID: " . $faction_id . "'>" . $factions[$faction_id] . "</a>";?></td>
-                      <td><?=$value?></td>
-                      <td><?=$faction_values[$npc_value]?></td>
-                      <td>(<?=$tmpfacshort[$temp]?>)</td>
-                      <td align="right">
-                        <a href="index.php?editor=npc&z=<?=$currzone?>&zoneid=<?=$currzoneid?>&npcid=<?=$npcid?>&npc_faction_id=<?=$npc_faction_id?>&faction_id=<?=$faction_id?>&action=19"><img src="images/edit2.gif" style="border: 0;" title="Edit this Faction Hit" alt="Edit this Faction Hit"></a>
-                        <a href="index.php?editor=npc&z=<?=$currzone?>&zoneid=<?=$currzoneid?>&npcid=<?=$npcid?>&npc_faction_id=<?=$npc_faction_id?>&faction_id=<?=$faction_id?>&action=21" onClick="return confirm('Are you sure you want to remove this faction hit?');"><img src="images/remove.gif" style="border: 0;" title="Remove this Faction Hit" alt="Remove this Faction Hit"></a>
-                      </td>
-                    </tr>
-<?endforeach;?>
-                  </table>
-<?} else {?>
-                None<br>
-<?}?>
-                  <br><b>Faction Amount: </b><?=$faction_amount?>
-                </div>
-              </center>
-            </td>
+                     <div style="padding: 10px; border: 1px solid grey; margin-right: 10px;">
+                                <b>NPC Faction ID</b>: <?= $npc_faction_id ?? "" ?> [<a
+                                        href="index.php?editor=npc&z=<?= $currzone ?? "" ?>&zoneid=<?= $currzoneid ?? "" ?>&npcid=<?= $npcid ?>&action=3">edit</a>]
+                                [<a href="index.php?editor=npc&z=<?= $currzone ?? "" ?>&zoneid=<?= $currzoneid ?? "" ?>&npcid=<?= $npcid ?>&npcfid=<?= $npc_faction_id ?? "" ?>&action=47">update</a>]<br/>
+                                <?php if (isset($npc_faction_id) && $npc_faction_id > 0) { ?>
+                                    "
+                                    <a href="index.php?editor=npc&z=<?= $currzone ?? "" ?>&zoneid=<?= $currzoneid ?? "" ?>&npcid=<?= $npcid ?>&action=10"><?= $factionname ?? "" ?></a>"
+                                    <br/><br/>
+                                <?php } ?>
+                                <b>Primary Faction</b>: [<a
+                                        href="index.php?editor=npc&z=<?= $currzone ?? "" ?>&zoneid=<?= $currzoneid ?? "" ?>&npcid=<?= $npcid ?>&action=12">edit</a>]<br/>
+                                <?php echo (!empty($primaryfactionname)) ? "<a title='Faction: " . ($primaryfaction ?? "") . "'>" . $primaryfactionname . "</a>" : "None"; ?>
+                                <br/><br/>
+                                <b>Faction Hits:</b> <a
+                                        href="index.php?editor=npc&z=<?= $currzone ?? "" ?>&zoneid=<?= $currzoneid ?? "" ?>&npcid=<?= $npcid ?>&action=15"><img
+                                            src="images/add.gif" style="border: 0;" alt="Add Icon"
+                                            title="Add Faction Hit"></a><br/>
+                                <?php if (!empty($faction_hits)) { ?>
+                                    <table style="width: 100%;">
+                                        <?php $temp_ = 0; ?>
+                                        <?php foreach ($faction_hits as $hit): extract($hit); ?>
+                                            <tr>
+                                                <td>(<?= $sort_order ?>)</td>
+                                                <td><?php echo "<a title='Faction ID: " . $faction_id . "'>" . $factions[$faction_id] . "</a>"; ?></td>
+                                                <td><?= $value ?></td>
+                                                <td><?= $faction_values[$npc_value] ?></td>
+                                                <td>(<?= $tmpfacshort[$temp] ?>)</td>
+                                                <td style="text-align: right;">
+                                                    <a href="index.php?editor=npc&z=<?= $currzone ?>&zoneid=<?= $currzoneid ?>&npcid=<?= $npcid ?>&npc_faction_id=<?= $npc_faction_id ?>&faction_id=<?= $faction_id ?>&action=19">
+                                                        <img src="images/edit2.gif" style="border: 0;" alt="Edit Icon"
+                                                             title="Edit this Faction Hit"></a>
+                                                    <a href="index.php?editor=npc&z=<?= $currzone ?>&zoneid=<?= $currzoneid ?>&npcid=<?= $npcid ?>&npc_faction_id=<?= $npc_faction_id ?>&faction_id=<?= $faction_id ?>&action=21"
+                                                       onClick="return confirm('Are you sure you want to remove this faction hit?');"><img
+                                                                src="images/remove.gif" alt="Remove Icon"></a>
+                                                    <?php if ($temp_ != 0) { ?>
+                                                        <a href="index.php?editor=npc&z=<?= $currzone ?>&zoneid=<?= $currzoneid ?>&npcid=<?= $npcid ?>&npc_faction_id=<?= $npc_faction_id ?>&faction_id=<?= $faction_id ?>&action=95">
+                                                            <img src="images/upgrade.gif" style="border: 0;"
+                                                                 alt="Upgrade Icon" title="Change order"></a>
+                                                    <?php } else { ?>
+                                                        <a><img src="images/blank.png" alt="Blank Icon"
+                                                                style="border: 0;"></a>
+                                                        <?php $temp_ = 1; ?>
+                                                    <?php } ?>
+                                                    <a href="index.php?editor=npc&z=<?= $currzone ?>&zoneid=<?= $currzoneid ?>&npcid=<?= $npcid ?>&npc_faction_id=<?= $npc_faction_id ?>&faction_id=<?= $faction_id ?>&action=96"><img
+                                                                src="images/downgrade.gif" alt="Downgrade Icon" style="border: 0;"
+                                                                title="Change order"></a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                <?php } else { ?>
+                                    None<br/>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </td>
             <td>
               <fieldset>
                 <legend><strong>Vitals</strong></legend>
