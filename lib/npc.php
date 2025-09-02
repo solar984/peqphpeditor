@@ -1063,6 +1063,12 @@ function npc_info() {
 
   $query = "SELECT * FROM npc_types WHERE id=$npcid";
   $result = $mysql_content_db->query_assoc($query);
+  
+  // to prevent some 'Notice' warnings; all variables need initialization, really
+  if (!$result)
+	  $result = array("notfound" => true, "id" => '', "name" => '', "lastname" => '', "npc_faction_id" => 0, "see_invis" => 0,
+		"see_invis_undead" => 0, "see_hide" => 0, "see_improved_hide" => 0);
+  
   $factionid = $result['npc_faction_id'];
 
   $result['factionname'] = '';
