@@ -893,8 +893,9 @@ function get_spawngroups($search): bool|array|string
 
   $results = $mysql_content_db->query_mult_assoc($query);
 
-  if (!$results)
-    return;
+    if (empty($results)) {
+        return false;
+    }
 
   for ($x=0; $x<count($results); $x++) {
     $id = $results[$x]['spawngroupID'];
