@@ -644,12 +644,11 @@ switch ($action) {
     $body->set('currzone', $z);
     $body->set('currzoneid', $zoneid);
     $body->set('npcid', $npcid);
-    if (isset($_GET['sid']) && $_GET['sid'] > 0) {
-      $body->set('sid', $_GET['sid']);
-    }
-    if (isset($_POST['new_sid']) && $_POST['new_sid'] > 0) {
-      $body->set('sid', $_POST['new_sid']);
-    }
+    if ($_POST['new_sid'] > 0) {
+            $body->set('sid', $_POST['new_sid']);
+        } else {
+            $body->set('sid', $_GET['sid']);
+        }
     $vars = get_spawngroup_info();
     if ($vars) {
       foreach ($vars as $key=>$value) {
