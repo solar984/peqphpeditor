@@ -860,7 +860,8 @@ switch ($action) {
     exit;
 }
 
-function get_spawngroups($search) {
+function get_spawngroups($search): bool|array|string
+{
   global $mysql_content_db, $npcid, $spawngroup_limit;
 
   if ($search != '') {
@@ -934,7 +935,8 @@ function get_spawngroups($search) {
   return $results;
 }
 
-function get_spawngroup_member_info() {
+function get_spawngroup_member_info(): bool|array|string|null
+{
   global $mysql_content_db;
 
   $sid = $_GET['sid'];
@@ -946,7 +948,8 @@ function get_spawngroup_member_info() {
   return $result;
 }
 
-function add_spawngroup_member() {
+function add_spawngroup_member(): void
+{
   check_authorization();
   global $mysql_content_db;
 
@@ -995,7 +998,8 @@ function add_spawngroup_member() {
   }
 }
 
-function add_multiple_spawngroup_member() {
+function add_multiple_spawngroup_member(): void
+{
   check_authorization();
   global $mysql_content_db, $z, $spawngroup_limit;
 
@@ -1067,7 +1071,8 @@ function add_multiple_spawngroup_member() {
   }
 }
 
-function update_spawngroup_member() {
+function update_spawngroup_member(): void
+{
   check_authorization();
   global $mysql_content_db;
 
@@ -1096,7 +1101,8 @@ function update_spawngroup_member() {
   }
 }
 
-function delete_spawngroup_member($balance) {
+function delete_spawngroup_member($balance): void
+{
   check_authorization();
   global $mysql_content_db, $npcid;
   $sid = $_GET['sid'];
@@ -1156,7 +1162,8 @@ function valid_npc() {
   }
 }
 
-function balance_spawns($sid) {
+function balance_spawns($sid): void
+{
   check_authorization();
   global $mysql_content_db;
 
@@ -1190,7 +1197,8 @@ function balance_spawns($sid) {
   }
 }
 
-function get_spawngroup_info() {
+function get_spawngroup_info(): bool|array|string|null
+{
   global $mysql_content_db;
   $sid = $_GET['sid'];
     $new_sid = $_POST['new_sid'];
@@ -1203,7 +1211,8 @@ function get_spawngroup_info() {
     return $mysql_content_db->query_assoc($query);
 }
 
-function update_spawngroup_name() {
+function update_spawngroup_name(): void
+{
   check_authorization();
   global $mysql_content_db;
   $sid = $_GET['sid'];
