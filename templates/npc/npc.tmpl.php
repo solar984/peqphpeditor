@@ -114,6 +114,7 @@ if ($loottable_id > 0) {
                                 <b>Faction Hits:</b> <a href="index.php?editor=npc&z=<?= $currzone ?? "" ?>&zoneid=<?= $currzoneid ?? "" ?>&npcid=<?= $npcid ?>&action=15"><img src="images/add.gif" style="border: 0;" title="Add Faction Hit"  alt="Add Faction Hit"></a><br/>
                                 <?if ($faction_hits != '') {?>
 									<table width="100%">
+									<? $temp_ = 0; ?>
 								<?foreach($faction_hits as $hit): extract($hit);?>
                                             <tr>
                                                 <td>(<?= $sort_order ?>)</td>
