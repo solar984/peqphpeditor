@@ -1193,16 +1193,15 @@ function balance_spawns($sid) {
 
 function get_spawngroup_info() {
   global $mysql_content_db;
-  $new_sid = ((isset($_POST['new_sid'])) ? $_POST['new_sid'] : 0);
+  $sid = $_GET['sid'];
+    $new_sid = $_POST['new_sid'];
 
-  if ($new_sid > 0) {
-    $query = "SELECT * FROM spawngroup WHERE id=$new_sid";
-    $result = $mysql_content_db->query_assoc($query);
-    if ($result) {
-      return $result;
+    if ($new_sid > 0) {
+        $query = "SELECT name, spawn_limit, max_x, min_x, max_y, min_y, delay, mindelay, despawn, despawn_timer, dist, wp_spawns FROM spawngroup WHERE id=$new_sid";
+    } else {
+        $query = "SELECT name, spawn_limit, max_x, min_x, max_y, min_y, delay, mindelay, despawn, despawn_timer, dist, wp_spawns FROM spawngroup WHERE id=$sid";
     }
-  }
-  return null;
+    return $mysql_content_db->query_assoc($query);
 }
 
 function update_spawngroup_name() {

@@ -1,79 +1,47 @@
-  <div class="edit_form" style="width:350px">
-    <div class="edit_form_header">Spawngroup <?=$sid?></div>
-    <div class="edit_form_content">
-      <form method="post" action="index.php?editor=spawn&z=<?=$currzone?>&zoneid=<?=$currzoneid?>&npcid=<?=$npcid?>&sid=<?=$sid?>&action=5">
-        <table align="center" cellpadding="3" cellspacing="3">
-          <tr>
-            <td colspan="2">
-              Spawngroup Name:<br>
-              <input type="text" name="name" size="40" value="<?=$name?>">
-            </td>
-          </tr>
-          <tr>
-            <td>
-              spawn_limit:<br>
-              <input type="text" name="spawn_limit" size="10" value="<?=$spawn_limit?>">
-            </td>
-            <td>
-              dist:<br>
-              <input type="text" name="dist" size="10" value="<?=$dist?>">
-            </td>
-          </tr>
-          <tr>
-            <td>
-              mindelay:<br>
-              <input type="text" name="mindelay" size="10" value="<?=$mindelay?>">
-            </td>
-            <td>
-              delay:<br>
-              <input type="text" name="delay" size="10" value="<?=$delay?>">
-            </td>
-          </tr>
-          <tr>
-            <td>
-              min_x:<br>
-              <input type="text" name="min_x" size="10" value="<?=$min_x?>">
-            </td>
-            <td>
-              max_x:<br>
-              <input type="text" name="max_x" size="10" value="<?=$max_x?>">
-            </td>
-          </tr>
-          <tr>
-            <td>
-              min_y:<br>
-              <input type="text" name="min_y" size="10" value="<?=$min_y?>">
-            </td>
-            <td>
-              max_y:<br>
-              <input type="text" name="max_y" size="10" value="<?=$max_y?>">
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              despawn:<br>
-              <select name="despawn">
-<?foreach($despawntype as $key=>$value):?>
-                <option value="<?=$key?>"<?echo ($key == $despawn)? " selected" : "";?>><?=$key?>: <?=$value?></option>
-<?endforeach;?>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              despawn timer:<br>
-              <input type="text" name="despawn_timer" size="10" value="<?=$despawn_timer?>">
-            </td>
-            <td>
-              wp_spawns:<br>
-              <input type="text" name="wp_spawns" size="10" value="<?=$wp_spawns?>">
-            </td>
-          </tr>
-        </table><br><br>
-        <center>
-          <input type="submit" name="submit" value="Submit Changes">&nbsp;&nbsp;
-          <input type="button" value="Cancel" onClick="history.back();">
-        </center>
+<div class="edit_form" style="width:350px">
+	<div class="edit_form_header">
+       <div class="center">
+            Spawngroup <?= $sid ?>
+        </div>
+	</div>
+	
+	<div class="edit_form_content">
+		<form method="post" 
+		  action="index.php?editor=spawn&z=<?=$currzone?>&zoneid=<?=$currzoneid?>&npcid=<?=$npcid?>&sid=<?=$sid?>&action=5">
+			<div class="center">
+                <label for="name">Spawngroup Name:</label><br>
+                <input type="text" id="name" name="name" size="25" value="<?= $name ?? "" ?>"><br><br>
+				<label for="spawn_limit">spawn_limit:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label for="distance">dist:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="wp_spawns">WP Spawns:</label><br>
+                <input type="text" id="spawn_limit" name="spawn_limit" size="6" value="<?= $spawn_limit ?? "" ?>">&nbsp;
+                <input type="text" id="dist" name="dist" size="6" value="<?= $dist ?? "" ?>">&nbsp;
+				<select id="wp_spawns" name="wp_spawns" style="width: 70px;">
+                    <option value="0"<?php echo empty($wp_spawns) ? " selected" : "" ?>>Off</option>
+                    <option value="1"<?php echo !empty($wp_spawns) ? " selected" : "" ?>>Enabled</option>
+                </select><br><br>
+                 <label for="mindelay">mindelay:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="delay">delay:</label>&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                <input type="text" id="mindelay" name="mindelay" size="5" value="<?= $mindelay ?? "" ?>">
+                <input type="text" id="delay" name="delay" size="5" value="<?= $delay ?? "" ?>"><br><br>
+                <label for="max_x">max_x:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="min_x">min_x:</label><br>
+                <input type="text" id="max_x" name="max_x" size="5" value="<?= $max_x ?? "" ?>">
+                <input type="text" id="min_x" name="min_x" size="5" value="<?= $min_x ?? "" ?>"><br><br>
+                <label for="max_y">max_y:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="min_y">min_y:</label><br>
+                <input type="text" id="max_y" name="max_y" size="5" value="<?= $max_y ?? "" ?>">
+                <input type="text" id="min_y" name="min_y" size="5" value="<?= $min_y ?? "" ?>"><br><br>
+                <label for="despawn">despawn:</label><br>
+                <select id="despawn" name="despawn" style="width: 160px;">
+                    <?php foreach ($despawntype as $key => $value): ?>
+                        <option value="<?= $key ?>"<?php echo (isset($despawn) && $key == $despawn) ? " selected" : ""; ?>><?= $key ?>
+                            : <?= $value ?></option>
+                    <?php endforeach; ?></select><br><br>
+                <label for="despawn_timer">despawn timer:</label><br>
+                <input type="text" id="despawn_timer" name="despawn_timer" size="5" value="<?= $despawn_timer ?? "" ?>"><br><br>
+                <input type="submit" name="submit" value="Submit Changes">
+		 </div>
       </form>
     </div>
   </div>
