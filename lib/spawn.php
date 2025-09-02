@@ -644,11 +644,12 @@ switch ($action) {
     $body->set('currzone', $z);
     $body->set('currzoneid', $zoneid);
     $body->set('npcid', $npcid);
-    if ($_POST['new_sid'] > 0) {
-            $body->set('sid', $_POST['new_sid']);
-        } else {
-            $body->set('sid', $_GET['sid']);
-        }
+	if (isset($_GET['sid']) && $_GET['sid'] > 0) {
+      $body->set('sid', $_GET['sid']);
+    }
+    if (isset($_POST['new_sid']) && $_POST['new_sid'] > 0) {
+      $body->set('sid', $_POST['new_sid']);
+    }
     $vars = get_spawngroup_info();
     if ($vars) {
       foreach ($vars as $key=>$value) {
@@ -1202,7 +1203,7 @@ function get_spawngroup_info(): bool|array|string|null
 {
   global $mysql_content_db;
   $sid = $_GET['sid'];
-    $new_sid = $_POST['new_sid'];
+  $new_sid = ((isset($_POST['new_sid'])) ? $_POST['new_sid'] : 0);
 
     if ($new_sid > 0) {
         $query = "SELECT name, spawn_limit, max_x, min_x, max_y, min_y, delay, mindelay, despawn, despawn_timer, dist, wp_spawns FROM spawngroup WHERE id=$new_sid";
