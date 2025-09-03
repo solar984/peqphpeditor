@@ -1548,18 +1548,21 @@ function add_npc() {
   check_authorization();
   global $mysql_content_db, $specialattacks;
 
+  if (!isset($_POST['name']) || $_POST['name'] == '')
+	  return;
+
   // Define checkbox fields:
-  if ($_POST['qglobal'] != 1) $_POST['qglobal'] = 0;
-  if ($_POST['npc_aggro'] != 1) $_POST['npc_aggro'] = 0;
-  if ($_POST['findable'] != 1) $_POST['findable'] = 0;
-  if ($_POST['trackable'] != 1) $_POST['trackable'] = 0;
-  if ($_POST['private_corpse'] != 1) $_POST['private_corpse'] = 0;
-  if ($_POST['unique_spawn_by_name'] != 1) $_POST['unique_spawn_by_name'] = 0;
-  if ($_POST['underwater'] != 1) $_POST['underwater'] = 0;
-  if ($_POST['isquest'] != 1) $_POST['isquest'] = 0;
-  if ($_POST['ignore_despawn'] != 1) $_POST['ignore_despawn'] = 0;
-  if ($_POST['skip_global_loot'] != 1) $_POST['skip_global_loot'] = 0;
-  if ($_POST['rare_spawn'] != 1) $_POST['rare_spawn'] = 0;
+  if (!isset($_POST['qglobal'])) $_POST['qglobal'] = 0;
+  if (!isset($_POST['npc_aggro'])) $_POST['npc_aggro'] = 0;
+  if (!isset($_POST['findable'])) $_POST['findable'] = 0;
+  if (!isset($_POST['trackable'])) $_POST['trackable'] = 0;
+  if (!isset($_POST['private_corpse'])) $_POST['private_corpse'] = 0;
+  if (!isset($_POST['unique_spawn_by_name'])) $_POST['unique_spawn_by_name'] = 0;
+  if (!isset($_POST['underwater'])) $_POST['underwater'] = 0;
+  if (!isset($_POST['isquest'])) $_POST['isquest'] = 0;
+  if (!isset($_POST['ignore_despawn'])) $_POST['ignore_despawn'] = 0;
+  if (!isset($_POST['skip_global_loot'])) $_POST['skip_global_loot'] = 0;
+  if (!isset($_POST['rare_spawn'])) $_POST['rare_spawn'] = 0;
 
   foreach ($specialattacks as $k => $v) {
     if (isset($_POST["$k"])) {

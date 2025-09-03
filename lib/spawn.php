@@ -262,7 +262,8 @@ switch ($action) {
     $body->set('pausetype', $pausetype);
     $body->set('npcid', $npcid);
     $body->set('pathgrid', $_GET['pathgrid']);
-    $body->set('spid', $_GET['spid']);
+    $spid = $_GET['spid'] ?? 0;
+    $body->set('spid', $spid);
     $vars = gridentry_info();
     if ($vars) {
       foreach ($vars as $key=>$value) {
