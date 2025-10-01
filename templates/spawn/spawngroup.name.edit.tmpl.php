@@ -40,6 +40,17 @@
                     <?php endforeach; ?></select><br><br>
                 <label for="despawn_timer">despawn timer:</label><br>
                 <input type="text" id="despawn_timer" name="despawn_timer" size="5" value="<?= $despawn_timer ?? "" ?>"><br><br>
+				<label for="rand_spawns">rand_spawns:</label><br>
+                <input type="text" id="rand_spawns" name="rand_spawns" size="5"
+                       value="<?= $rand_spawns ?? "" ?>"><br><br>
+                <label for="rand_respawntime">rand_respawntime:</label><br>
+                <input type="text" id="rand_respawntime" name="rand_respawntime" size="5"
+                       value="<?= $rand_respawntime ?? "" ?>"><br><br>
+                <label for="rand_variance">rand_variance:</label><br>
+                <input type="text" id="rand_variance" name="rand_variance" size="5" value="<?= $rand_variance ?? "" ?>"><br><br>
+                <label for="rand_condition_">rand_condition:</label><br>
+                <input type="text" id="rand_condition_" name="rand_condition_" size="5"
+                       value="<?= $rand_condition_ ?? "" ?>"><br><br>
                 <input type="submit" name="submit" value="Submit Changes">
 		 </div>
       </form>

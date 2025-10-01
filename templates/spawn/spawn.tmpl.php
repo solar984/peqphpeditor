@@ -118,6 +118,28 @@
                     </tr>
                 </table>
             </div>
+            <div class="table_header">
+                <table style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+                    <tr>
+                        <td style="padding: 0; width: 25%">
+                            rand_spawns: <a
+                                    href="index.php?editor=spawn&z=<?= $currzone ?>&zoneid=<?= $currzoneid ?>&npcid=<?= $npcID ?>&sid=<?= $spawngroupID ?>&action=4"><?= $rand_spawns ?? 0 ?></a>
+                        </td>
+                        <td style="padding: 0; width: 25%">
+                            rand_respawntime: <a
+                                    href="index.php?editor=spawn&z=<?= $currzone ?>&zoneid=<?= $currzoneid ?>&npcid=<?= $npcID ?>&sid=<?= $spawngroupID ?>&action=4"><?= $rand_respawntime ?? 0 ?></a>
+                        </td>
+                        <td style="padding: 0; width: 25%">
+                            rand_variance: <a
+                                    href="index.php?editor=spawn&z=<?= $currzone ?>&zoneid=<?= $currzoneid ?>&npcid=<?= $npcID ?>&sid=<?= $spawngroupID ?>&action=4"><?= $rand_variance ?? 0 ?></a>
+                        </td>
+                        <td style="padding: 0; width: 25%">
+                            rand_condition: <a
+                                    href="index.php?editor=spawn&z=<?= $currzone ?>&zoneid=<?= $currzoneid ?>&npcid=<?= $npcID ?>&sid=<?= $spawngroupID ?>&action=4"><?= $rand_condition_ ?? 0 ?></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>			
              <?php if (!empty($npcs)): ?>
                 <div class="table_content2" style="padding: 0;">
                     <table style="width: 100%; border-collapse: collapse: border-spacing: 0;">

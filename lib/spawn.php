@@ -915,6 +915,10 @@ function get_spawngroups($search): bool|array|string
     $results[$x]['mindelay'] = $result['mindelay'];
     $results[$x]['despawn'] = $result['despawn'];
     $results[$x]['despawn_timer'] = $result['despawn_timer'];
+    $results[$x]['rand_spawns'] = $result['rand_spawns'];
+    $results[$x]['rand_respawntime'] = $result['rand_respawntime'];
+    $results[$x]['rand_variance'] = $result['rand_variance'];
+    $results[$x]['rand_condition_'] = $result['rand_condition_'];
     $results[$x]['wp_spawns'] = $result['wp_spawns'];
 
     $query = "SELECT count(*) AS count FROM spawn2 WHERE spawngroupID=$id";
@@ -1207,9 +1211,9 @@ function get_spawngroup_info(): bool|array|string|null
   $new_sid = ((isset($_POST['new_sid'])) ? $_POST['new_sid'] : 0);
 
     if ($new_sid > 0) {
-        $query = "SELECT name, spawn_limit, max_x, min_x, max_y, min_y, delay, mindelay, despawn, despawn_timer, dist, wp_spawns FROM spawngroup WHERE id=$new_sid";
+        $query = "SELECT name, spawn_limit, max_x, min_x, max_y, min_y, delay, mindelay, despawn, despawn_timer, dist,rand_spawns, rand_respawntime, rand_variance, rand_condition_, wp_spawns FROM spawngroup WHERE id=$new_sid";
     } else {
-        $query = "SELECT name, spawn_limit, max_x, min_x, max_y, min_y, delay, mindelay, despawn, despawn_timer, dist, wp_spawns FROM spawngroup WHERE id=$sid";
+        $query = "SELECT name, spawn_limit, max_x, min_x, max_y, min_y, delay, mindelay, despawn, despawn_timer, dist, rand_spawns, rand_respawntime, rand_variance, rand_condition_, wp_spawns FROM spawngroup WHERE id=$sid";
     }
     return $mysql_content_db->query_assoc($query);
 }
@@ -1230,9 +1234,13 @@ function update_spawngroup_name(): void
   $mindelay = $_POST['mindelay'];
   $despawn = $_POST['despawn'];
   $despawn_timer = $_POST['despawn_timer'];
+  $rand_spawns = $_POST['rand_spawns'];
+  $rand_respawntime = $_POST['rand_respawntime'];
+  $rand_variance = $_POST['rand_variance'];
+  $rand_condition_ = $_POST['rand_condition_'];
   $wp_spawns = $_POST['wp_spawns'];
 
-  $query = "UPDATE spawngroup SET name=\"$name\", spawn_limit=\"$spawn_limit\", dist=\"$dist\", max_x=\"$max_x\", min_x=\"$min_x\", max_y=\"$max_y\", min_y=\"$min_y\", delay=\"$delay\", mindelay=\"$mindelay\",despawn=\"$despawn\", despawn_timer=\"$despawn_timer\", wp_spawns=\"$wp_spawns\" WHERE id=$sid";
+  $query = "UPDATE spawngroup SET name=\"$name\", spawn_limit=\"$spawn_limit\", dist=\"$dist\", max_x=\"$max_x\", min_x=\"$min_x\", max_y=\"$max_y\", min_y=\"$min_y\", delay=\"$delay\", mindelay=\"$mindelay\",despawn=\"$despawn\", despawn_timer=\"$despawn_timer\", rand_spawns=\"$rand_spawns\", rand_respawntime=\"$rand_respawntime\", rand_variance=\"$rand_variance\", rand_condition_=\"$rand_condition_\", wp_spawns=\"$wp_spawns\" WHERE id=$sid";
   $mysql_content_db->query_no_result($query);
 }
 
@@ -1646,7 +1654,7 @@ function add_spawnpoint() {
 }
 
 function add_spawngroup() {
-  check_authorization();
+ check_authorization();
   global $mysql_content_db;
 
   $id = $_POST['id'];
@@ -1670,9 +1678,13 @@ function add_spawngroup() {
   $mindelay = intval($_POST['mindelay']);
   $despawn = $_POST['despawn'];
   $despawn_timer = $_POST['despawn_timer'];
+  $rand_spawns = $_POST['rand_spawns'];
+  $rand_respawntime = $_POST['rand_respawntime'];
+  $rand_variance = $_POST['rand_variance'];
+  $rand_condition_ = $_POST['rand_condition_'];
   $wp_spawns = $_POST['wp_spawns'];
 
-  $query = "INSERT INTO spawngroup VALUES($id, \"$name\", \"$spawn_limit\", \"$dist\", \"$max_x\", \"$min_x\", \"$max_y\", \"$min_y\", \"$delay\", \"$mindelay\", \"$despawn\", \"$despawn_timer\", \"$wp_spawns\")";
+  $query = "INSERT INTO spawngroup VALUES($id, \"$name\", \"$spawn_limit\", \"$dist\", \"$max_x\", \"$min_x\", \"$max_y\", \"$min_y\", \"$delay\", \"$mindelay\", \"$despawn\", \"$despawn_timer\", \"$rand_spawns\", \"$rand_respawntime\", \"$rand_variance\", \"$rand_condition_\", \"$wp_spawns\")";
   $mysql_content_db->query_no_result($query);
 
   $query = "INSERT INTO spawnentry SET spawngroupID=$id, npcID=$npcID, chance=$chance, condition_value_filter=$condition_value_filter, min_time=$min_time, max_time=$max_time, min_expansion=$min_expansion, max_expansion=$max_expansion, content_flags=NULL, content_flags_disabled=NULL";

@@ -124,6 +124,26 @@
               <input type="text" name="wp_spawns" size="10" value="0">
             </td>
           </tr>
+		  <tr>
+            <td>
+              rand_spawns:<br>
+              <input type="text" name="rand_spawns" size="5" value="0">
+            </td>
+            <td>
+              rand respawntime:<br>
+              <input type="text" name="rand_respawntime" size="5" value="1200">
+            </td>
+			</tr>
+			<tr>
+            <td>
+              rand variance:<br>
+              <input type="text" name="rand_variance" size="5" value="0">
+            </td>
+            <td>
+              rand condition:<br>
+              <input type="text" name="rand_condition_" size="5" value="0">
+            </td>						
+		  </tr>		  
         </table><br><br>
         <center>
           <input type="submit" name="submit" value="Submit">&nbsp;&nbsp;
