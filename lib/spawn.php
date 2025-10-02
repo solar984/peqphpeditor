@@ -902,24 +902,26 @@ function get_spawngroups($search): bool|array|string
   for ($x=0; $x<count($results); $x++) {
     $id = $results[$x]['spawngroupID'];
 
-    $query = "SELECT name, spawn_limit, dist, max_x, min_x, max_y, min_y, delay, mindelay, despawn, despawn_timer, wp_spawns FROM spawngroup WHERE id=$id";
+    $query = "SELECT name, spawn_limit, dist, max_x, min_x, max_y, min_y, delay, mindelay, despawn, despawn_timer, rand_spawns, rand_respawntime, rand_variance, rand_condition_, wp_spawns FROM spawngroup WHERE id=$id";
     $result = $mysql_content_db->query_assoc($query);
-    $results[$x]['name'] = $result['name'];
-    $results[$x]['spawn_limit'] = $result['spawn_limit'];
-    $results[$x]['dist'] = $result['dist'];
-    $results[$x]['max_x'] = $result['max_x'];
-    $results[$x]['min_x'] = $result['min_x'];
-    $results[$x]['max_y'] = $result['max_y'];
-    $results[$x]['min_y'] = $result['min_y'];
-    $results[$x]['delay'] = $result['delay'];
-    $results[$x]['mindelay'] = $result['mindelay'];
-    $results[$x]['despawn'] = $result['despawn'];
-    $results[$x]['despawn_timer'] = $result['despawn_timer'];
-    $results[$x]['rand_spawns'] = $result['rand_spawns'];
-    $results[$x]['rand_respawntime'] = $result['rand_respawntime'];
-    $results[$x]['rand_variance'] = $result['rand_variance'];
-    $results[$x]['rand_condition_'] = $result['rand_condition_'];
-    $results[$x]['wp_spawns'] = $result['wp_spawns'];
+	if(!empty($results[$x] && !empty($result))) {
+		$results[$x]['name'] = $result['name'];
+		$results[$x]['spawn_limit'] = $result['spawn_limit'];
+		$results[$x]['dist'] = $result['dist'];
+		$results[$x]['max_x'] = $result['max_x'];
+		$results[$x]['min_x'] = $result['min_x'];
+		$results[$x]['max_y'] = $result['max_y'];
+		$results[$x]['min_y'] = $result['min_y'];
+		$results[$x]['delay'] = $result['delay'];
+		$results[$x]['mindelay'] = $result['mindelay'];
+		$results[$x]['despawn'] = $result['despawn'];
+		$results[$x]['despawn_timer'] = $result['despawn_timer'];
+		$results[$x]['rand_spawns'] = $result['rand_spawns'];
+		$results[$x]['rand_respawntime'] = $result['rand_respawntime'];
+		$results[$x]['rand_variance'] = $result['rand_variance'];
+		$results[$x]['rand_condition_'] = $result['rand_condition_'];
+		$results[$x]['wp_spawns'] = $result['wp_spawns'];
+	}
 
     $query = "SELECT count(*) AS count FROM spawn2 WHERE spawngroupID=$id";
     $result = $mysql_content_db->query_assoc($query);
