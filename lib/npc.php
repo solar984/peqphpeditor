@@ -2432,9 +2432,9 @@ function get_stats() {
 	if ($npc_level < 15)
 		$results["AC"] = $npc_level * 3;	
 	if ($npc_level < 3)
-		$results["ac"] += 2;
-	if ($results["ac"] > 200)
-		$results["ac"] = 200;
+		$results["AC"] += 2;
+	if ($results["AC"] > 200)
+		$results["AC"] = 200;
 	
 	if ($npc_level > 15)
 		$results["hp"] *= 1.25;
