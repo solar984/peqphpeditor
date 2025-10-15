@@ -656,7 +656,7 @@ function update_loottable() {
   $name = $_POST['name'];
   $mincash = $_POST['mincash'];
   $maxcash = $_POST['maxcash'];
-  $avgcoin = $_POST['avgcoin'];
+  $avgcoin = $_POST['avgcoin'] = (($maxcash-$mincash)/2)+$mincash;
   //$done = $_POST['done'];
   $min_expansion = $_POST['min_expansion'];
   $max_expansion = $_POST['max_expansion'];
@@ -691,7 +691,7 @@ function add_loottable() {
   $name = $_POST['name'];
   $mincash = $_POST['mincash'];
   $maxcash = $_POST['maxcash'];
-  $avgcoin = $_POST['avgcoin'];
+  $avgcoin = $_POST['avgcoin'] = (($maxcash-$mincash)/2)+$mincash;
   //$done = $_POST['done'];
   $min_expansion = $_POST['min_expansion'];
   $max_expansion = $_POST['max_expansion'];
@@ -1551,7 +1551,7 @@ function update_global_loottable() {
   $name = $_POST['name'];
   $mincash = $_POST['mincash'];
   $maxcash = $_POST['maxcash'];
-  $avgcoin = $_POST['avgcoin'];
+  $avgcoin = $_POST['avgcoin'] = (($maxcash-$mincash)/2)+$mincash;
   //$done = $_POST['done'];
   $min_expansion = $_POST['min_expansion'];
   $max_expansion = $_POST['max_expansion'];
