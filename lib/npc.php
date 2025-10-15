@@ -154,6 +154,7 @@ switch ($action) {
       $body->set('tmpfacshort', $tmpfacshort);
       $body->set('pet', get_ispet());
       $body->set('special_abilities_max', $special_abilities_max);
+	  $body->set('specialattacks', $specialattacks);
       $body->set('flymodetype', $flymodetype);
       $vars = npc_info();
       if ($vars) {
