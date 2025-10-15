@@ -569,20 +569,6 @@ switch ($action) {
       foreach ($vars_ as $key=>$value) {
         $body->set($key, $value);
       }
-      $body->set('maxlevel', 0);
-      $body->set('STR', $vars_['stats']);
-      $body->set('STA', $vars_['stats']);
-      $body->set('DEX', $vars_['stats']);
-      $body->set('AGI', $vars_['stats']);
-      $body->set('_INT', $vars_['stats']);
-      $body->set('WIS', $vars_['stats']);
-      $body->set('CHA', $vars_['stats']);
-      $body->set('MR', $vars_['resists']);
-      $body->set('CR', $vars_['resists']);
-      $body->set('FR', $vars_['resists']);
-      $body->set('PR', $vars_['resists']);
-      $body->set('DR', $vars_['resists']);
-      $body->set('changed_level', TRUE);
     }
     break;
  case 45: // Change NPC level
@@ -1847,6 +1833,9 @@ function copy_npc() {
   $fields .= "is_parcel_merchant=\"" . $_POST['is_parcel_merchant'] . "\", ";
   $fields .= "multiquest_enabled=\"" . $_POST['multiquest_enabled'] . "\", ";
   $fields .= "npc_tint_id=\"" . $_POST['npc_tint_id'] . "\"";
+  $fields .= "ignore_distance=\"" . $_POST['ignore_distance'] . "\"";
+  $fields .= "combat_mana_regen=\"" . $_POST['combat_mana_regen'] . "\", ";
+  $fields =  rtrim($fields, ", ");
   if ($fields != '') {
     $query = "INSERT INTO npc_types SET $fields";
     $query2 = "UPDATE npc_types SET special_abilities = TRIM(TRAILING '^' FROM special_abilities)";
@@ -2422,37 +2411,62 @@ function get_stats() {
   global $mysql_content_db;
  
   $npc_level = $_POST['npc_level'];
+  if ($npc_level < 1)
+	  $npc_level =1;
  
-  if ($npc_level < 11) {
-    $query = "SELECT level, AVG(hp) AS hp, AVG(mana) AS mana, AVG(ac) AS AC, AVG(str) AS stats, AVG(mr) AS resists, AVG(mindmg) AS mindmg, AVG(maxdmg) AS maxdmg, AVG(attack_speed) AS attack_speed, AVG(attack_delay) AS attack_delay FROM npc_types WHERE level=\"$npc_level\" AND name NOT LIKE '#%' AND bodytype < 35 AND bodytype NOT IN (10, 11, 17, 18, 33) AND hp < 1000 AND race != 240 AND str < 300 AND id < 200000 GROUP BY level";
-    $results = $mysql_content_db->query_assoc($query);
-    return $results;
-  }
-  if ($npc_level > 10 && $npc_level < 31) {
-    $query = "SELECT level, AVG(hp) AS hp, AVG(mana) AS mana, AVG(ac) AS AC, AVG(str) AS stats, AVG(mr) AS resists, AVG(mindmg) AS mindmg, AVG(maxdmg) AS maxdmg, AVG(attack_speed) AS attack_speed, AVG(attack_delay) AS attack_delay FROM npc_types WHERE level=\"$npc_level\" AND name NOT LIKE '#%' AND bodytype < 35 AND bodytype NOT IN (10, 11, 17, 18, 33) AND hp < 2500 AND race != 240 AND str < 300 AND id < 200000 GROUP BY level";
-    $results = $mysql_content_db->query_assoc($query);
-    return $results;
-  }
-  if ($npc_level > 30 && $npc_level < 51) {
-    $query = "SELECT level, AVG(hp) AS hp, AVG(mana) AS mana, AVG(ac) AS AC, AVG(str) AS stats, AVG(mr) AS resists, AVG(mindmg) AS mindmg, AVG(maxdmg) AS maxdmg, AVG(attack_speed) AS attack_speed, AVG(attack_delay) AS attack_delay FROM npc_types WHERE level=\"$npc_level\" AND name NOT LIKE '#%' AND bodytype < 35 AND bodytype NOT IN (10, 11, 17, 18, 33) AND hp < 5000 AND race != 240 AND str < 300 AND id < 200000 GROUP BY level";
-    $results = $mysql_content_db->query_assoc($query);
-    return $results;
-  }
-  if ($npc_level > 50 && $npc_level < 61) {
-    $query = "SELECT level, AVG(hp) AS hp, AVG(mana) AS mana, AVG(ac) AS AC, AVG(str) AS stats, AVG(mr) AS resists, AVG(mindmg) AS mindmg, AVG(maxdmg) AS maxdmg, AVG(attack_speed) AS attack_speed, AVG(attack_delay) AS attack_delay FROM npc_types WHERE level=\"$npc_level\" AND name NOT LIKE '#%' AND bodytype < 35 AND bodytype NOT IN (10, 11, 17, 18, 33) AND hp < 7000 AND race != 240 AND str < 300 GROUP BY level";
-    $results = $mysql_content_db->query_assoc($query);
-    return $results;
-  }
-  if ($npc_level > 60 && $npc_level < 66) {
-    $query = "SELECT level, AVG(hp) AS hp, AVG(mana) AS mana, AVG(ac) AS AC, AVG(str) AS stats, AVG(mr) AS resists, AVG(mindmg) AS mindmg, AVG(maxdmg) AS maxdmg, AVG(attack_speed) AS attack_speed, AVG(attack_delay) AS attack_delay FROM npc_types WHERE level=\"$npc_level\" AND name NOT LIKE '#%' AND bodytype < 35 AND bodytype NOT IN (10, 11, 17, 18, 33) AND hp < 7500 AND race != 240 GROUP BY level";
-    $results = $mysql_content_db->query_assoc($query);
-    return $results;
-  }
-  else {
-    $query = "SELECT level, AVG(hp) AS hp, AVG(mana) AS mana, AVG(ac) AS AC, AVG(str) AS stats, AVG(mr) AS resists, AVG(mindmg) AS mindmg, AVG(maxdmg) AS maxdmg, AVG(attack_speed) AS attack_speed, AVG(attack_delay) AS attack_delay FROM npc_types WHERE level=\"$npc_level\" AND name NOT LIKE '#%' AND bodytype < 35 AND bodytype NOT IN (10, 11, 17, 18, 33) AND hp < 50000 AND race != 240 GROUP BY level";
-    $results = $mysql_content_db->query_assoc($query);
-    return $results;
-  }
+ 	$results = array("level" => $npc_level);
+	
+	$results["hp"] = $npc_level * 25;
+	$results["mana"] = 35 * $npc_level;
+	$results["AC"] = round($npc_level * 4.1 - 15);
+	$results["stats"] = 70 + $npc_level;
+	$results["resists"] = 35;
+	$results["mindmg"] = max(round(($npc_level + 1) / 10), 1);
+	$results["maxdmg"] = ($npc_level + 1) * 2;
+	$results["attack_delay"] = 30;
+	$results["mana_regen_rate"] = 5 + round($npc_level / 2);
+	
+		if ($npc_level < 15)
+		$results["resists"] = 25;
+
+	if ($npc_level < 15)
+		$results["AC"] = $npc_level * 3;	
+	if ($npc_level < 3)
+		$results["ac"] += 2;
+	if ($results["ac"] > 200)
+		$results["ac"] = 200;
+	
+	if ($npc_level > 15)
+		$results["hp"] *= 1.25;
+	if ($npc_level > 30)
+		$results["hp"] *= 1.25;
+	if ($npc_level > 35)
+		$results["hp"] *= 1.25;
+	if ($npc_level > 40)
+	{
+		$results["hp"] *= 2;
+		$results["mindmg"] += 25;
+		$results["maxdmg"] += 25;
+	}
+	if ($npc_level > 49)
+	{
+		$results["hp"] *= 2;
+		$results["hp"] += ($npc_level - 50) * 500;
+		$results["mindmg"] = 45;
+		$results["maxdmg"] = 115 + $npc_level;
+		$results["attack_delay"] = 20;
+	}
+	if ($npc_level > 58)
+	{
+		$results["hp"] += ($npc_level - 50) * 500;
+		$results["mindmg"] = 50 + $npc_level;
+		$results["maxdmg"] = 400 + ($npc_level - 58) * 37;
+	}
+	
+	$results["hp"] = floor($results["hp"]);
+	$results["hp_regen_rate"] = round($results["hp"] / 33);
+	
+	return $results;
 }
 
 function change_npc_level_ver() {

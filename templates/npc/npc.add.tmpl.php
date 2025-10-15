@@ -136,9 +136,9 @@
               <td align="left" width="13%">MR:      <br><input type="text" name="MR" size="5" value="<?=$resists?>"></td>
               <td align="left" width="13%">CR:      <br><input type="text" name="CR" size="5" value="<?=$resists?>"></td>
               <td align="left" width="13%">FR:      <br><input type="text" name="FR" size="5" value="<?=$resists?>"></td>
-              <td align="left" width="13%">PR:      <br><input type="text" name="PR" size="5" value="<?=$resists?>"></td>
-              <td align="left" width="13%">DR:      <br><input type="text" name="DR" size="5" value="<?=$resists?>"></td>
-              <td align="left" width="15%">Corrup:  <br><input type="text" name="Corrup" size="5" value="<?=$resists?>"></td>
+              <td align="left" width="13%">PR:      <br><input type="text" name="PR" size="5" value="15"></td>
+              <td align="left" width="13%">DR:      <br><input type="text" name="DR" size="5" value="15"></td>
+              <td align="left" width="15%">Corrup:  <br><input type="text" name="Corrup" size="5" value="5"></td>
 <?
   $PhR_Default = 15 + ($level / 3);
   if ($level > 50)
@@ -153,7 +153,7 @@
           <table width="100%" border="0" cellpadding="3" cellspacing="0">
             <tr>
               <td align="left" width="14%">Min Dmg:      <br><input type="text" name="mindmg" size="5" value="<?=$mindmg?>" onChange="sdamageCheck();"></td>
-              <td align="left" width="14%">HP Regen:     <br><input type="text" name="hp_regen_rate" size="5" value="0"></td>
+              <td align="left" width="14%">HP Regen:     <br><input type="text" name="hp_regen_rate" size="5" value="<?=$hp_regen_rate?>"></td>
               <td align="left" width="14%">HP Reg (/sec):<br><input type="text" name="hp_regen_per_second" size="5" value="0"></td>
               <td align="left" width="14%">Attack Count: <br><input type="text" name="attack_count" size="5" value="-1"></td>
               <td align="left" width="14%">Atk Delay:    <br><input type="text" name="attack_delay" size="5" value="<?=$attack_delay?>"></td>
