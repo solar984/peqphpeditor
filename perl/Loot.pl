@@ -184,7 +184,7 @@ if($loottable_id != 0)
 		if($drop_actual => $minactual)
 		{
 			### lootdrop_entries generation
-			$query_handle3 = $connect->prepare("INSERT INTO `lootdrop_entries` (lootdrop_id, item_id, item_charges, equip_item, chance, disabled_chance, minlevel, maxlevel, multiplier) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+			$query_handle3 = $connect->prepare("INSERT INTO `lootdrop_entries` (lootdrop_id, item_id, item_charges, equip_item, chance, disabled_chance, npc_min_level, npc_max_level, multiplier) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
 			$query_handle3->execute($lootdropid, $itemid, 1, $equip, $drop_rate, $disabled_rate, 0, 127, $stacksize);
 			$Drops++;
 		}
@@ -322,7 +322,7 @@ else
 			if($drop_actual => $minactual)
 			{
 				### lootdrop_entries generation
-				$query_handle3 = $connect->prepare("INSERT INTO `lootdrop_entries` (lootdrop_id, item_id, item_charges, equip_item, chance, disabled_chance, minlevel, maxlevel, multiplier) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+				$query_handle3 = $connect->prepare("INSERT INTO `lootdrop_entries` (lootdrop_id, item_id, item_charges, equip_item, chance, disabled_chance, npc_min_level, npc_max_level, multiplier) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
 				$query_handle3->execute($lootdropid, $itemid, 1, $equip, $drop_rate, $disabled_rate, 0, 127, $stacksize);
 				$Drops++;
 			}
