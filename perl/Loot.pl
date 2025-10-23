@@ -6,10 +6,10 @@
 use DBI;
 use DBD::mysql;
 
-$host = 'localhost';
-$user = 'user';
-$pass = 'pass';
-$db = 'eqemu';
+$host = $ENV{'DB_HOST'};
+$user = $ENV{'DB_USER'};
+$pass =  $ENV{'DB_PASSWORD'};
+$db = $ENV{'DB_NAME'};
 
 # PERL DBI CONNECT
 $dsn = "dbi:mysql:$db:$host:3306";
