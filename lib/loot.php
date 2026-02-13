@@ -765,9 +765,17 @@ function change_loottable_byrace() {
 function suggest_new_loottable() {
   global $mysql_content_db, $npcid;
 
-  $query = "SELECT MAX(id) AS id FROM loottable";
+  $query = "SELECT id FROM loottable WHERE id = 1";
   $result = $mysql_content_db->query_assoc($query);
-  $id = $result['id'] + 1;
+  if (!$result) {
+	  return 1;
+  }
+  
+  $query = "SELECT MIN(n1.id + 1) AS loottableid FROM loottable n1 LEFT JOIN loottable n2 ON n1.id + 1 = n2.id WHERE n1.id > 0 and n2.id IS NULL";
+  $result = $mysql_content_db->query_assoc($query);	
+
+  
+  $id = $result['loottableid'];
   $name = getNPCName($npcid);
 
   return array("id"=>$id, "name"=>$name);
@@ -1054,9 +1062,18 @@ function suggest_new_lootdrop() {
   global $mysql_content_db, $npcid;
   $ltid = $_GET['ltid'];
 
-  $query = "SELECT MAX(id) AS id FROM lootdrop";
+  $query = "SELECT id FROM lootdrop WHERE id = 1";
   $result = $mysql_content_db->query_assoc($query);
-  $id = $result['id'] + 1;
+  
+  if (!$result) { // Very first id is available
+    return 1;
+  }
+  
+  // Find next available id
+  $query = "SELECT MIN(n1.id + 1) AS lootid FROM lootdrop n1 LEFT JOIN lootdrop n2 ON n1.id + 1 = n2.id WHERE n1.id >= 0 AND n2.id IS NULL";
+  $result = $mysql_content_db->query_assoc($query);
+  
+  $id = $result['lootid'];
 
   $name = getNPCName($npcid);
   $name = $ltid . "_" . $name . "_";
