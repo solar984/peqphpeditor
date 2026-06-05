@@ -89,7 +89,8 @@ $eventtype = array(
   5 => "KILLEDPC",
   6 => "KILLEDNPC",
   7 => "ONSPAWN",
-  8 => "ONDESPAWN"
+  8 => "ONDESPAWN",
+  9 => "KILLED"
 );
 
 $emotetype = array(
@@ -838,6 +839,7 @@ switch ($action) {
   case 76: // Add emote
     check_authorization();
     $breadcrumbs .= " >> <a href='index.php?editor=npc&action=78'>Emotes</a>" . " >> Add Emote";
+	$pagetitle .= " - Emotes - Add Emote";
     if ($npcid) {
       $body = new Template("templates/npc/emotes.add.tmpl.php");
     }
@@ -867,6 +869,7 @@ switch ($action) {
     exit;
   case 78: // View emote list
     $breadcrumbs .= " >> <a href='index.php?editor=npc&action=78'>Emotes</a>";
+	$pagetitle .= " - Emotes";
     $curr_page = (isset($_GET['page'])) ? $_GET['page'] : $default_page;
     $curr_size = (isset($_GET['size'])) ? $_GET['size'] : $default_size;
     $curr_sort = (isset($_GET['sort'])) ? $columns[$_GET['sort']] : $columns[$default_sort];
@@ -1043,6 +1046,25 @@ switch ($action) {
     move_down_factionhit();
     header("Location: index.php?editor=npc&z=$z&zoneid=$zoneid&npcid=$npcid");
     exit;
+  case 97: // Add emote entry
+    check_authorization();
+    $breadcrumbs .= " >> <a href='index.php?editor=npc&action=78'>Emotes</a>" . " >> Add Emote";
+	$pagetitle .= " - Emotes - Add Emote";
+    $body = new Template("templates/npc/emotes.addentry.tmpl.php");
+    $body->set('currzone', $z);
+    $body->set('currzoneid', $zoneid);
+    $body->set('npcid', $npcid);
+    $body->set('eventtype', $eventtype);
+    $body->set('emotetype', $emotetype);
+    $emoteid = 0;
+    if($_GET['emoteid'] != 0) {
+      $emoteid = $_GET['emoteid'];
+    }
+    else {
+      $emoteid = suggest_emoteid();
+    }
+    $body->set('emoteid', $emoteid);
+    break;
 }
 
 function npc_info() {

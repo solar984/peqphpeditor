@@ -295,7 +295,11 @@ function get_npcid_by_emoteid($emoteid) {
 
   $query = "SELECT id FROM npc_types WHERE emoteid=\"$emoteid\" LIMIT 1";
   $result = $mysql_content_db->query_assoc($query);
-  return $result['id'];
+  if($result) {
+	 return $result['id']; 
+  } else {
+	  return "N/A";
+  }
 }
 
 function getPlayerName($playerid) {

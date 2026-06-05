@@ -42,8 +42,8 @@
           <td><strong>Heading:</strong> <?=$heading?></td>
         </tr>
         <tr>
-          <td><strong>Respawn:</strong> <?=$respawntime?>s</td>
-          <td><strong>Variance:</strong> <?=$variance?>s</td>
+          <td><strong>Respawn:</strong> <?=timer_text($respawntime)?></td> 
+          <td><strong>Variance:</strong> <?=timer_text($variance)?></td>
           <td><strong>Condition:</strong> <?=$_condition?><?echo ($_condition > 0) ? " [<a href='index.php?editor=spawn&z=$currzone&zoneid=$currzoneid&npcid=$npcid&spid=$id&action=36'>View</a>]" : "";?></td>
           <td><strong>Cond Value:</strong> <?=$cond_value?></td>
         </tr>
