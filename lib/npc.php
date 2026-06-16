@@ -1710,7 +1710,9 @@ function add_npc() {
   $fields .= "keeps_sold_items=\"" . $_POST['keeps_sold_items'] . "\", ";
   $fields .= "is_parcel_merchant=\"" . $_POST['is_parcel_merchant'] . "\", ";
   $fields .= "multiquest_enabled=\"" . $_POST['multiquest_enabled'] . "\", ";
-  $fields .= "npc_tint_id=\"" . $_POST['npc_tint_id'] . "\"";
+  $fields .= "npc_tint_id=\"" . $_POST['npc_tint_id'] . "\", ";
+
+
 
   if ($fields != '') {
     $query = "INSERT INTO npc_types SET $fields";
@@ -1855,9 +1857,8 @@ function copy_npc() {
   $fields .= "keeps_sold_items=\"" . $_POST['keeps_sold_items'] . "\", ";
   $fields .= "is_parcel_merchant=\"" . $_POST['is_parcel_merchant'] . "\", ";
   $fields .= "multiquest_enabled=\"" . $_POST['multiquest_enabled'] . "\", ";
-  $fields .= "npc_tint_id=\"" . $_POST['npc_tint_id'] . "\"";
-  $fields .= "ignore_distance=\"" . $_POST['ignore_distance'] . "\"";
-  $fields .= "combat_mana_regen=\"" . $_POST['combat_mana_regen'] . "\", ";
+  $fields .= "npc_tint_id=\"" . $_POST['npc_tint_id'] . "\", ";
+ 
   $fields =  rtrim($fields, ", ");
   if ($fields != '') {
     $query = "INSERT INTO npc_types SET $fields";
