@@ -1089,7 +1089,7 @@ function add_item() {
 function get_starting_items() {
   global $mysql_content_db;
 
-  $query = "SELECT * FROM starting_items";
+  $query = "SELECT * FROM starting_items ORDER BY id";
   $results = $mysql_content_db->query_mult_assoc($query);
 
   if ($results) {
@@ -1141,12 +1141,12 @@ function update_starting_item() {
   $mysql_content_db->query_no_result($query);
 
   if ($content_flags != "") {
-    $query = "UPDATE starting_items SET content_flags=\"$content_flags\" WHERE id=$id AND race=$race";
+    $query = "UPDATE starting_items SET content_flags=\"$content_flags\" WHERE id=$id";
     $mysql_content_db->query_no_result($query);
   }
 
   if ($content_flags_disabled != "") {
-    $query = "UPDATE starting_items SET content_flags_disabled=\"$content_flags_disabled\" WHERE id=$id AND race=$race";
+    $query = "UPDATE starting_items SET content_flags_disabled=\"$content_flags_disabled\" WHERE id=$id";
     $mysql_content_db->query_no_result($query);
   }
 }
@@ -1178,12 +1178,12 @@ function insert_starting_item() {
   $mysql_content_db->query_no_result($query);
 
   if ($content_flags != "") {
-    $query = "UPDATE starting_items SET content_flags=\"$content_flags\" WHERE id=$id AND race=$race";
+    $query = "UPDATE starting_items SET content_flags=\"$content_flags\" WHERE id=$id";
     $mysql_content_db->query_no_result($query);
   }
 
   if ($content_flags_disabled != "") {
-    $query = "UPDATE starting_items SET content_flags_disabled=\"$content_flags_disabled\" WHERE id=$id AND race=$race";
+    $query = "UPDATE starting_items SET content_flags_disabled=\"$content_flags_disabled\" WHERE id=$id";
     $mysql_content_db->query_no_result($query);
   }
 }
